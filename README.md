@@ -9,7 +9,7 @@ You can use it to serve the current directory by just calling `http-server`
 To install you can simply run 
 
 ```bash
-go get github.com/shogoki/http-server
+go install github.com/shogoki/http-server
 ```
 
 
