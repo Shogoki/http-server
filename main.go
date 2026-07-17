@@ -1,13 +1,17 @@
 package main
 
 import (
+	"flag"
+	"fmt"
 	"log"
 	"net/http"
-    "fmt"
 )
 
 func main() {
+	port := flag.Int("port", 8080, "port to listen on")
+	flag.Parse()
 
-    fmt.Println("Starting HTP Server on http://localhost:8080")
-	log.Fatal(http.ListenAndServe("localhost:8080", http.FileServer(http.Dir("."))))
+	addr := fmt.Sprintf("localhost:%d", *port)
+	fmt.Printf("Starting HTTP Server on http://%s\n", addr)
+	log.Fatal(http.ListenAndServe(addr, http.FileServer(http.Dir("."))))
 }
