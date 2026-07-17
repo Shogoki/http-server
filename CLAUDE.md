@@ -11,11 +11,15 @@ A minimal Go static file server that serves the current working directory over H
 ```bash
 go build ./...          # build
 go vet ./...            # lint
-go run . -port 3000     # run, serving the current directory (default port: 8080)
+go run . -host 0.0.0.0 -port 3000   # run, serving the current directory (defaults: localhost:8080)
 ```
 
 Install for end users: `go install github.com/shogoki/http-server`
 
 ## Architecture
 
-`main.go` parses a `-port` flag (default 8080), then starts `http.ListenAndServe` bound to `localhost` with `http.FileServer(http.Dir("."))` as the handler. The server intentionally binds to localhost only and serves whatever directory it is launched from.
+`main.go` parses `-host` (default `localhost`), `-port` (default 8080), and `-version` flags, then starts `http.ListenAndServe` with `http.FileServer(http.Dir("."))` as the handler. It serves whatever directory it is launched from.
+
+## Releases
+
+Versions are git tags (`vX.Y.Z`) on `main`; the same version string is kept in the `version` constant in `main.go` (printed by `-version`). When cutting a release, bump the constant and tag the merge commit on `main`.
